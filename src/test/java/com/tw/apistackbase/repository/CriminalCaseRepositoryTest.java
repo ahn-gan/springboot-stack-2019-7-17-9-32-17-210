@@ -1,5 +1,6 @@
 package com.tw.apistackbase.repository;
 
+import com.tw.apistackbase.model.CaseComponent;
 import com.tw.apistackbase.model.CriminalCase;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,8 +12,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
-
-//import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -29,7 +28,14 @@ public class CriminalCaseRepositoryTest {
         criminalCases.add(new CriminalCase("test-case-1", 1600));
         criminalCases.add(new CriminalCase("test-case-2", 1700));
         criminalCases.add(new CriminalCase("test-case-3", 1800));
+        List<CaseComponent> caseComponents = new ArrayList<>();
+        caseComponents.add(new CaseComponent("objective-description-1", "subjective-description-1"));
+        caseComponents.add(new CaseComponent("objective-description-2", "subjective-description-2"));
+        caseComponents.add(new CaseComponent("objective-description-3", "subjective-description-3"));
         criminalCaseRepository.saveAll(criminalCases);
+//        CaseComponent caseComponent = new CaseComponent("objective-description-1", "subjective-description-1");
+//        CaseComponent caseComponent = ;
+//        CaseComponent caseComponent = ;
     }
 
     @Test
@@ -55,5 +61,14 @@ public class CriminalCaseRepositoryTest {
         criminalCaseRepository.deleteById(Long.valueOf(1));
         List<CriminalCase> findCriminalCases = criminalCaseRepository.findAll();
         Assertions.assertEquals(findCriminalCases.size(), 2);
+    }
+
+    @Test
+    public void should_return_criminal_case_with_detail_when_set_details_to_it() {
+        CaseComponent caseComponent = new CaseComponent("objective-description-1", "subjective-description-1");
+        CriminalCase criminalCase = new CriminalCase("test-case-new", 1600);
+        criminalCase.setCaseComponents(caseComponent);
+        CriminalCase saveCriminalCase =  criminalCaseRepository.save(criminalCase);
+        Assertions.assertSame(saveCriminalCase.getCaseComponents(), caseComponent);
     }
 }
