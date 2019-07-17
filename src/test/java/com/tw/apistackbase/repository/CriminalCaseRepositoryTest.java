@@ -2,6 +2,7 @@ package com.tw.apistackbase.repository;
 
 import com.tw.apistackbase.model.CaseComponent;
 import com.tw.apistackbase.model.CriminalCase;
+import com.tw.apistackbase.model.Procuratorate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -28,14 +29,12 @@ public class CriminalCaseRepositoryTest {
         criminalCases.add(new CriminalCase("test-case-1", 1600));
         criminalCases.add(new CriminalCase("test-case-2", 1700));
         criminalCases.add(new CriminalCase("test-case-3", 1800));
-        List<CaseComponent> caseComponents = new ArrayList<>();
-        caseComponents.add(new CaseComponent("objective-description-1", "subjective-description-1"));
-        caseComponents.add(new CaseComponent("objective-description-2", "subjective-description-2"));
-        caseComponents.add(new CaseComponent("objective-description-3", "subjective-description-3"));
+//        List<CaseComponent> caseComponents = new ArrayList<>();
+//        caseComponents.add(new CaseComponent("objective-description-1", "subjective-description-1"));
+//        caseComponents.add(new CaseComponent("objective-description-2", "subjective-description-2"));
+//        caseComponents.add(new CaseComponent("objective-description-3", "subjective-description-3"));
         criminalCaseRepository.saveAll(criminalCases);
 //        CaseComponent caseComponent = new CaseComponent("objective-description-1", "subjective-description-1");
-//        CaseComponent caseComponent = ;
-//        CaseComponent caseComponent = ;
     }
 
     @Test
@@ -70,5 +69,14 @@ public class CriminalCaseRepositoryTest {
         criminalCase.setCaseComponents(caseComponent);
         CriminalCase saveCriminalCase =  criminalCaseRepository.save(criminalCase);
         Assertions.assertSame(saveCriminalCase.getCaseComponents(), caseComponent);
+    }
+
+    @Test
+    public void should_return_criminal_case_with_procuratortate_when_set_procuratortate_to_it() {
+        Procuratorate procuratorate = new Procuratorate("AHN");
+        CriminalCase criminalCase = new CriminalCase("test-case-new", 1600);
+        criminalCase.setProcuratorate(procuratorate);
+        CriminalCase saveCriminalCase =  criminalCaseRepository.save(criminalCase);
+        Assertions.assertSame(saveCriminalCase.getProcuratorate(), procuratorate);
     }
 }

@@ -1,6 +1,7 @@
 package com.tw.apistackbase.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class CriminalCase {
@@ -19,6 +20,10 @@ public class CriminalCase {
     @OneToOne(cascade = CascadeType.ALL)
     private CaseComponent caseComponents;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @NotNull
+    private Procuratorate procuratorate;
+
     public CriminalCase() {
     }
 
@@ -31,6 +36,13 @@ public class CriminalCase {
         this.caseName = caseName;
         this.occurrenceTime = occurrenceTime;
         this.caseComponents = caseComponents;
+    }
+
+    public CriminalCase(String caseName, long occurrenceTime, CaseComponent caseComponents, @NotNull Procuratorate procuratorate) {
+        this.caseName = caseName;
+        this.occurrenceTime = occurrenceTime;
+        this.caseComponents = caseComponents;
+        this.procuratorate = procuratorate;
     }
 
     public long getId() {
@@ -63,5 +75,13 @@ public class CriminalCase {
 
     public void setCaseComponents(CaseComponent caseComponents) {
         this.caseComponents = caseComponents;
+    }
+
+    public Procuratorate getProcuratorate() {
+        return procuratorate;
+    }
+
+    public void setProcuratorate(Procuratorate procuratorate) {
+        this.procuratorate = procuratorate;
     }
 }
