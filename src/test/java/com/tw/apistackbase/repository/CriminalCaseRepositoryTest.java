@@ -43,5 +43,9 @@ public class CriminalCaseRepositoryTest {
         Assertions.assertEquals(findCriminalCases.get(0).getOccurrenceTime(), 1700);
     }
 
-
+    @Test
+    public void should_criminal_cases_when_find_by_name() {
+        List<CriminalCase> findCriminalCases = criminalCaseRepository.findAllByCaseName("test-case-1");
+        Assertions.assertEquals(findCriminalCases.get(0).getCaseName(), "test-case-1");
+    }
 }
