@@ -122,3 +122,7 @@ logs/
 .classpath
 
 
+/.idea/misc.xml
+/.idea/vcs.xml
+/.idea/.name
+/h2/criminaldb.mv.db
