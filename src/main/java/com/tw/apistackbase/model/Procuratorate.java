@@ -14,7 +14,8 @@ public class Procuratorate {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "procuratorate_ID")
     private List<Prosecutor> prosecutors;
 
     public Procuratorate() {

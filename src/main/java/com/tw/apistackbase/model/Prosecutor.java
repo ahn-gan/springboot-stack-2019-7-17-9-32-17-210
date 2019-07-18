@@ -1,9 +1,6 @@
 package com.tw.apistackbase.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Prosecutor {
@@ -15,6 +12,9 @@ public class Prosecutor {
 
     @Column(name = "name", nullable = false, unique = true)
     private String name;
+
+    @ManyToOne
+    private Procuratorate procuratorate;
 
     public Prosecutor() {
     }
@@ -37,5 +37,13 @@ public class Prosecutor {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Procuratorate getProcuratorate() {
+        return procuratorate;
+    }
+
+    public void setProcuratorate(Procuratorate procuratorate) {
+        this.procuratorate = procuratorate;
     }
 }
