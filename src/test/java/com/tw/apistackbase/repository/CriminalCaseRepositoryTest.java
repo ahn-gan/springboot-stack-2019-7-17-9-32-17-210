@@ -3,8 +3,10 @@ package com.tw.apistackbase.repository;
 import com.tw.apistackbase.model.CaseComponent;
 import com.tw.apistackbase.model.CriminalCase;
 import com.tw.apistackbase.model.Procuratorate;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,15 +28,10 @@ public class CriminalCaseRepositoryTest {
     @Before
     public void setUp() {
         criminalCases = new ArrayList<>();
-        criminalCases.add(new CriminalCase("test-case-1", 1600));
-        criminalCases.add(new CriminalCase("test-case-2", 1700));
-        criminalCases.add(new CriminalCase("test-case-3", 1800));
-//        List<CaseComponent> caseComponents = new ArrayList<>();
-//        caseComponents.add(new CaseComponent("objective-description-1", "subjective-description-1"));
-//        caseComponents.add(new CaseComponent("objective-description-2", "subjective-description-2"));
-//        caseComponents.add(new CaseComponent("objective-description-3", "subjective-description-3"));
+        criminalCases.add(new CriminalCase("test-case-1", 1600, new CaseComponent("case1-objective-name", "case1-subjective-name"), new Procuratorate("procu1-name")));
+        criminalCases.add(new CriminalCase("test-case-2", 1700, new CaseComponent("case2-objective-name", "case2-subjective-name"), new Procuratorate("procu2-name")));
+        criminalCases.add(new CriminalCase("test-case-3", 1800, new CaseComponent("case3-objective-name", "case3-subjective-name"), new Procuratorate("procu3-name")));
         criminalCaseRepository.saveAll(criminalCases);
-//        CaseComponent caseComponent = new CaseComponent("objective-description-1", "subjective-description-1");
     }
 
     @Test
